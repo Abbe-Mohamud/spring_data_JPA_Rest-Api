@@ -1,6 +1,9 @@
 package se.lexicon.spring_data_jpa_restapi.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +14,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipeId;
     private String recipeName;
+
 
     @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredients;
@@ -59,9 +63,14 @@ public class Recipe {
     }
 
     public void addRecipeIngredient(RecipeIngredient recipeIngredient){
+       if (recipeIngredients == null) {
+            recipeIngredients = new ArrayList<>();
+        }
         recipeIngredients.add(recipeIngredient);
         recipeIngredient.setRecipe(this);
     }
+
+
     public void removeRecipeCategory(RecipeIngredient recipeIngredient){
         recipeIngredient.setRecipe(null);
         recipeIngredients.remove(recipeIngredient);

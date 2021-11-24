@@ -31,8 +31,8 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public RecipeDto create(RecipeFormDto form) {
-        return convert.toRecipeDto(recipeRepository.save(convert.toRecipe(form)));
+    public RecipeDto create(RecipeFormDto formDto) {
+        return convert.toRecipeDto(recipeRepository.save(convert.toRecipe(formDto)));
     }
 
     @Override

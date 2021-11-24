@@ -1,5 +1,6 @@
 package se.lexicon.spring_data_jpa_restapi.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,8 +20,9 @@ public class RecipeIngredient {
     private double amount;
     private Measurement measurement;
 
-    @ManyToOne(/*cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH},*/fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipe_id")
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id"/*, nullable=false*/)
     private Recipe recipe;
 
     public RecipeIngredient() {}

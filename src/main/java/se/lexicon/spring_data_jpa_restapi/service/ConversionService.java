@@ -41,23 +41,23 @@ public class ConversionService {
 
 
     public List<RecipeIngredient> toRecipeIngredient(RecipeIngredientFormDto formDto){
-        return (List<RecipeIngredient>) new RecipeIngredient(formDto.getIngredient(), formDto.getAmount(), formDto.getMeasurement(),null/*null*/);
+        //return (List<RecipeIngredient>) new RecipeIngredient(formDto.getIngredient(), formDto.getAmount(), formDto.getMeasurement(),null/*null*/);
 
-     /*   List<RecipeIngredient> recipeIngredients = new ArrayList<>();
-        for (RecipeIngredient reIngredient: recipeIngredients){
+        List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+        for (RecipeIngredient reIngredient: formDto.getRecipe().getRecipeIngredients()){
             recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement(),reIngredient.getRecipe()));
             //recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement()));
         }
-        return recipeIngredients;*/
+        return recipeIngredients;
 
-    }
+     }
 
 
 
     public Recipe toRecipe(RecipeFormDto formDto){
 
-        List<RecipeIngredient> recipeIngredients = new ArrayList<>();
-        for (RecipeIngredient reIngredient: formDto.getRecipeIngredients()){
+       List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+         for (RecipeIngredient reIngredient: formDto.getRecipeIngredients()){
             recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement(),reIngredient.getRecipe()));
             //recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement()));
         }
@@ -67,7 +67,7 @@ public class ConversionService {
             categories.add(new RecipeCategory(reCategory.getCategory(), reCategory.getRecipes()));
         }
 
-        return new Recipe(formDto.getRecipeName(),formDto.getRecipeIngredients()/*recipeIngredients*/,formDto.getInstruction(),categories);
+        return new Recipe(formDto.getRecipeName(), /*,formDto.getRecipeIngredients()*/recipeIngredients,formDto.getInstruction(),categories);
     }
 
     public RecipeDto toRecipeDto(Recipe recipe){
@@ -92,8 +92,6 @@ public class ConversionService {
         }
 
 
-
-        //return new RecipeDto(recipe.getRecipeId(), recipe.getRecipeName(), recipeIngredients,recipeInstructionDto,categories);
 
         return new RecipeDto(recipe.getRecipeId(), recipe.getRecipeName(), recipeIngredients,recipeInstructionDto,categories);
     }
