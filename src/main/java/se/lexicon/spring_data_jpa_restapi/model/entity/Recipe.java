@@ -17,8 +17,7 @@ public class Recipe {
 
 
     @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "recipe")
-    private List<RecipeIngredient> recipeIngredients;
-
+    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instruction_id")
     private RecipeInstruction instruction;
@@ -66,7 +65,7 @@ public class Recipe {
        if (recipeIngredients == null) {
             recipeIngredients = new ArrayList<>();
         }
-        recipeIngredients.add(recipeIngredient);
+       this.recipeIngredients.add(recipeIngredient);
         recipeIngredient.setRecipe(this);
     }
 
@@ -76,7 +75,6 @@ public class Recipe {
         recipeIngredients.remove(recipeIngredient);
 
     }
-
 
 
     public int getRecipeId() {

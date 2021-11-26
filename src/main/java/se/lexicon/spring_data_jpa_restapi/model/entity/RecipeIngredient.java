@@ -22,7 +22,7 @@ public class RecipeIngredient {
 
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipe_id"/*, nullable=false*/)
+    @JoinColumn(name = "recipe_id" /*, nullable=false*/)
     private Recipe recipe;
 
     public RecipeIngredient() {}

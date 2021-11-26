@@ -56,18 +56,47 @@ public class ConversionService {
 
     public Recipe toRecipe(RecipeFormDto formDto){
 
-       List<RecipeIngredient> recipeIngredients = new ArrayList<>();
-         for (RecipeIngredient reIngredient: formDto.getRecipeIngredients()){
+//       List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+//         for (RecipeIngredient reIngredient: formDto.getRecipeIngredients()){
+//            recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement(),reIngredient.getRecipe()));
+//            //recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement()));
+
+
+
+
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+
+        for (RecipeIngredient reIngredient: formDto.getRecipeIngredients()){
+            Recipe recipe = new Recipe();
+
+            //reIngredient.setRecipe(recipe);
+            //recipeIngredients.add(reIngredient);
             recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement(),reIngredient.getRecipe()));
             //recipeIngredients.add(new RecipeIngredient(reIngredient.getIngredient(), reIngredient.getAmount(), reIngredient.getMeasurement()));
+
+            //recipe.addRecipeIngredient(recipeIngredient);
+
+            recipeIngredients.add(reIngredient);
+            reIngredient.setRecipe(recipe);
         }
+
+
+
+
+
 
         List<RecipeCategory> categories = new ArrayList<>();
         for (RecipeCategory reCategory: formDto.getCategories()){
             categories.add(new RecipeCategory(reCategory.getCategory(), reCategory.getRecipes()));
         }
 
+
         return new Recipe(formDto.getRecipeName(), /*,formDto.getRecipeIngredients()*/recipeIngredients,formDto.getInstruction(),categories);
+
+
+
+        //return new Recipe(formDto.getRecipeName(), /*,formDto.getRecipeIngredients()*/recipeIngredients,formDto.getInstruction(),categories);
     }
 
     public RecipeDto toRecipeDto(Recipe recipe){

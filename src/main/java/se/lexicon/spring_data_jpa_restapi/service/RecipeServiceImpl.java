@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.spring_data_jpa_assignment.exception.AppResourceNotFoundException;
 import se.lexicon.spring_data_jpa_restapi.model.dto.RecipeDto;
 import se.lexicon.spring_data_jpa_restapi.model.entity.Recipe;
+import se.lexicon.spring_data_jpa_restapi.model.entity.RecipeIngredient;
 import se.lexicon.spring_data_jpa_restapi.model.forms.RecipeFormDto;
 import se.lexicon.spring_data_jpa_restapi.repository.RecipeRepository;
 
@@ -32,6 +33,10 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     @Transactional
     public RecipeDto create(RecipeFormDto formDto) {
+//        Recipe recipe = new Recipe();
+//        RecipeIngredient recipeIngredient = new RecipeIngredient();
+//        recipeIngredient.setRecipe(recipe);
+//         recipe.addRecipeIngredient(recipeIngredient);
         return convert.toRecipeDto(recipeRepository.save(convert.toRecipe(formDto)));
     }
 
