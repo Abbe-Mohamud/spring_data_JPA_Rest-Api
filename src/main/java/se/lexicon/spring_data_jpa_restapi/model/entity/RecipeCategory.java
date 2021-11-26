@@ -1,6 +1,7 @@
 package se.lexicon.spring_data_jpa_restapi.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class RecipeCategory {
     private String category;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "categories")
-    private List<Recipe> recipes;
+    private List<Recipe> recipes = new ArrayList<>();
 
     public RecipeCategory() {}
 

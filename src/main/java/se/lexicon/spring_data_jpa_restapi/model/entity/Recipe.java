@@ -26,7 +26,7 @@ public class Recipe {
     @JoinTable(name = "recipe_recipe_category",
                joinColumns = @JoinColumn(name = "recipe_id"),
                 inverseJoinColumns = @JoinColumn(name = "recipe_category_id"))
-    private List<RecipeCategory> categories;
+    private List<RecipeCategory> categories = new ArrayList<>();
 
     public Recipe() {}
 
@@ -52,8 +52,12 @@ public class Recipe {
 
 
     public void addRecipeCategory(RecipeCategory recipeCategory){
-        categories.add(recipeCategory);
+        if (recipeIngredients == null) {
+            recipeIngredients = new ArrayList<>();
+        }
         recipeCategory.getRecipes().add(this);
+        categories.add(recipeCategory);
+
     }
     public void removeRecipeCategory(RecipeCategory recipeCategory){
         recipeCategory.getRecipes().remove(this);
